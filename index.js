@@ -344,6 +344,13 @@ async function run() {
       const result = await bookingsCollection.deleteOne(query)
       res.send(result)
     })
+
+    app.get('/bookings-room/:id', async (req, res) => {
+      const id = req.params.id
+      const result = await bookingsCollection.findOne({ _id: new ObjectId(id) })
+      res.send(result)
+    })
+
     // Admin Stat Data
     app.get('/admin-stat', verifyToken, verifyAdmin, async (req, res) => {
       const bookingsDetails = await bookingsCollection
